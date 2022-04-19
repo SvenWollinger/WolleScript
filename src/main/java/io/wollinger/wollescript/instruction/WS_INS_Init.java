@@ -16,7 +16,10 @@ public class WS_INS_Init implements WSIInstruction {
 
     @Override
     public void execute(WSFunction function) {
-        function.setVariable(identifier, variable);
+        if(!function.hasVariable(identifier))
+            function.setVariable(identifier, variable);
+        else
+            function.getRuntime().complainAndCrash(line, "Variable <" + identifier + "> already set!");
     }
 
     @Override

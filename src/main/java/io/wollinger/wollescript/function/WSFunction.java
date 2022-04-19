@@ -2,6 +2,7 @@ package io.wollinger.wollescript.function;
 
 
 import io.wollinger.wollescript.WSIContainer;
+import io.wollinger.wollescript.WSRuntime;
 import io.wollinger.wollescript.instruction.WSIInstruction;
 import io.wollinger.wollescript.variable.WSIVariable;
 
@@ -14,15 +15,15 @@ public class WSFunction implements WSIContainer {
 
     private final ArrayList<WSIInstruction> instructions = new ArrayList<>();
 
-    private final Runtime runtime;
+    private final WSRuntime runtime;
     private final WSFunction parent;
 
-    public WSFunction(Runtime runtime) {
+    public WSFunction(WSRuntime runtime) {
         this.runtime = runtime;
         this.parent = null;
     }
 
-    public WSFunction(Runtime runtime, WSFunction parent) {
+    public WSFunction(WSRuntime runtime, WSFunction parent) {
         this.runtime = runtime;
         this.parent = parent;
     }
@@ -33,7 +34,7 @@ public class WSFunction implements WSIContainer {
         }
     }
 
-    public Runtime getRuntime() {
+    public WSRuntime getRuntime() {
         return runtime;
     }
 
