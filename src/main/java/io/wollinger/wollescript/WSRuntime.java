@@ -6,6 +6,7 @@ import io.wollinger.wollescript.variable.WSIVariable;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class WSRuntime implements WSIContainer {
@@ -23,9 +24,11 @@ public class WSRuntime implements WSIContainer {
         boolean inQuotes = false;
         ArrayList<String> instructions = new ArrayList<>();
         StringBuilder currentInstruction = new StringBuilder();
+        char previousChar = 0;
         for(int i = 0; i < code.length(); i++) {
             char currentChar = code.charAt(i);
-            if(currentChar == '"') {
+
+            if(currentChar == '"' && previousChar != '\\') {
                 inQuotes = !inQuotes;
             } else if(currentChar == ';') {
                 if(inQuotes) {
@@ -37,9 +40,12 @@ public class WSRuntime implements WSIContainer {
             } else {
                 currentInstruction.append(currentChar);
             }
+            previousChar = currentChar;
         }
 
-
+        for(String instruction : instructions) {
+            System.out.println(instruction);
+        }
     }
 
     public void complainAndCrash(int line, String message) {
