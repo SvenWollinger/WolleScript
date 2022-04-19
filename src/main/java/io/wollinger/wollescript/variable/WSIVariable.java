@@ -1,11 +1,11 @@
 package io.wollinger.wollescript.variable;
 
 public interface WSIVariable {
-    public Object getValue();
+    Object getValue();
 
-    public WSIVariable plus(WSIVariable variable);
-    public WSIVariable minus(WSIVariable variable);
+    WSIVariable plus(WSIVariable variable);
+    WSIVariable minus(WSIVariable variable);
 
-    public WSIVariable plusEquals(WSIVariable variable);
-    public WSIVariable minusEquals(WSIVariable variable);
+    WSIVariable plusEquals(WSIVariable variable);
+    WSIVariable minusEquals(WSIVariable variable);
 }

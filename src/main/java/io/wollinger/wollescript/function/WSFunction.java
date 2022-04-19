@@ -9,13 +9,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class WSFunction implements WSIContainer {
-    private HashMap<String, WSIVariable> variables = new HashMap<>();
-    private HashMap<String, WSFunction> functions = new HashMap<>();
+    private final HashMap<String, WSIVariable> variables = new HashMap<>();
+    private final HashMap<String, WSFunction> functions = new HashMap<>();
 
-    private ArrayList<WSIInstruction> instructions = new ArrayList<>();
+    private final ArrayList<WSIInstruction> instructions = new ArrayList<>();
 
-    private Runtime runtime;
-    private WSFunction parent;
+    private final Runtime runtime;
+    private final WSFunction parent;
 
     public WSFunction(Runtime runtime) {
         this.runtime = runtime;

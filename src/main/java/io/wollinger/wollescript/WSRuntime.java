@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class WSRuntime implements WSIContainer {
-    private HashMap<String, WSIVariable> variables = new HashMap<>();
-    private HashMap<String, WSFunction> functions = new HashMap<>();
+    private final HashMap<String, WSIVariable> variables = new HashMap<>();
+    private final HashMap<String, WSFunction> functions = new HashMap<>();
 
-    private ArrayList<WSIInstruction> instructions = new ArrayList<>();
+    private final ArrayList<WSIInstruction> instructions = new ArrayList<>();
 
     public WSRuntime(File file) {
         parse(WSFileLoader.loadFile(file));

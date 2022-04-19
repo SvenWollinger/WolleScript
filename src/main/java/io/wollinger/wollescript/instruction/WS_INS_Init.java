@@ -5,8 +5,8 @@ import io.wollinger.wollescript.variable.WSIVariable;
 
 public class WS_INS_Init implements WSIInstruction {
     private final int line;
-    private String identifier;
-    private WSIVariable variable;
+    private final String identifier;
+    private final WSIVariable variable;
 
     public WS_INS_Init(int line, String identifier, WSIVariable variable) {
         this.line = line;
