@@ -1,46 +1,50 @@
-package io.wollinger.wollescript.function;
+package io.wollinger.wollescript;
 
-
-import io.wollinger.wollescript.WSIContainer;
+import io.wollinger.wollescript.function.WSFunction;
 import io.wollinger.wollescript.instruction.WSIInstruction;
 import io.wollinger.wollescript.variable.WSIVariable;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class WSFunction implements WSIContainer {
+public class WSRuntime implements WSIContainer {
     private HashMap<String, WSIVariable> variables = new HashMap<>();
     private HashMap<String, WSFunction> functions = new HashMap<>();
 
     private ArrayList<WSIInstruction> instructions = new ArrayList<>();
 
-    private Runtime runtime;
-    private WSFunction parent;
-
-    public WSFunction(Runtime runtime) {
-        this.runtime = runtime;
-        this.parent = null;
+    public WSRuntime(File file) {
+        parse(WSFileLoader.loadFile(file));
     }
 
-    public WSFunction(Runtime runtime, WSFunction parent) {
-        this.runtime = runtime;
-        this.parent = parent;
-    }
-
-    public void execute() {
-        for(WSIInstruction instruction : instructions) {
-            instruction.execute(this);
+    private void parse(String code) {
+        //Split into instructions
+        boolean inQuotes = false;
+        ArrayList<String> instructions = new ArrayList<>();
+        StringBuilder currentInstruction = new StringBuilder();
+        for(int i = 0; i < code.length(); i++) {
+            char currentChar = code.charAt(i);
+            if(currentChar == '"') {
+                inQuotes = !inQuotes;
+            } else if(currentChar == ';') {
+                if(inQuotes) {
+                    currentInstruction.append(currentChar);
+                } else {
+                    instructions.add(currentInstruction.toString());
+                    currentInstruction.setLength(0);
+                }
+            } else {
+                currentInstruction.append(currentChar);
+            }
         }
+
+
     }
 
-    public Runtime getRuntime() {
-        return runtime;
+    public void complainAndCrash(int line, String message) {
+        System.out.println("Fatal error!\n" + line + ": " + message);
     }
-
-    public WSFunction getParent() {
-        return parent;
-    }
-
 
     @Override
     public boolean hasVariable(String identifier) {

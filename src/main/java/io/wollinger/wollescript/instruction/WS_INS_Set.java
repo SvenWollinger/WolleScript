@@ -3,12 +3,12 @@ package io.wollinger.wollescript.instruction;
 import io.wollinger.wollescript.function.WSFunction;
 import io.wollinger.wollescript.variable.WSIVariable;
 
-public class WS_INS_Init implements WSIInstruction {
+public class WS_INS_Set implements WSIInstruction {
     private final int line;
     private String identifier;
     private WSIVariable variable;
 
-    public WS_INS_Init(int line, String identifier, WSIVariable variable) {
+    public WS_INS_Set(int line, String identifier, WSIVariable variable) {
         this.line = line;
         this.identifier = identifier;
         this.variable = variable;
